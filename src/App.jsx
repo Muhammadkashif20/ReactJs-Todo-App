@@ -51,23 +51,39 @@ import React from 'react'
 import { useState } from 'react'
 const App = () => {
     const [value,updatedValue]=useState("")
+    const [todo,addTodo]=useState([])
+    console.log(todo);
+    
     const inputValue=(event)=>{
         updatedValue(event.target.value)
-        console.log(event.target.value);
-        
-        
+        // console.log(event.target.value); 
     }
+    const AddValue=()=>{
+        if(value){
+            addTodo([...todo,value])
+            updatedValue("")
+            console.log(todo);     
+        }
+        else{
+            alert('Please Enter Your Todo 👀 ')
+        }
+    }   
   return (
     <div className='text-center'>
       <h1 className="text-3xl font-semibold m-3">My Todo App</h1>
       <div className='flex justify-center align-middle '>
-      <input type="text" placeholder='Enter Your Text' className='p-2 m-2 border-2 rounded-md w-[20rem]' onChange={inputValue}/>
-      <button  className='p-2 m-2 bg-blue-600 rounded-md text-white w-[4rem]'>Add</button>
+      <input type="text" placeholder='Enter Your Text' className='p-2 m-2 border-2 rounded-md w-[20rem]' onChange={inputValue} value={value}/>
+      <button  className='p-2 m-2 bg-blue-600 rounded-md text-white w-[4rem]' onClick={AddValue}>Add</button>
       </div>
-        <div>
-            <span>Text 1</span>
-            <button className='p-2 m-2 bg-red-600 rounded-md text-white'>Delete</button>
-        </div>
+            {todo.map((todo,id)=>{
+                return(
+                    <div key={id}>
+                        <span >{todo}</span>
+                        <button className='p-2 m-2 bg-red-600 rounded-md text-white'>Delete</button>
+                    </div>
+                )
+            })}
+            
     </div>
   )
 }
