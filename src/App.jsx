@@ -68,6 +68,11 @@ const App = () => {
             alert('Please Enter Your Todo 👀 ')
         }
     }   
+    const delBtn=(itemDel)=>{
+        const removeItem=[...todo]
+        removeItem.splice(itemDel,1)
+      addTodo(removeItem)
+    }
   return (
     <div className='text-center'>
       <h1 className="text-3xl font-semibold m-3">My Todo App</h1>
@@ -79,7 +84,7 @@ const App = () => {
                 return(
                     <div key={id}>
                         <span >{todo}</span>
-                        <button className='p-2 m-2 bg-red-600 rounded-md text-white'>Delete</button>
+                        <button className='p-2 m-2 bg-red-600 rounded-md text-white' onClick={delBtn}>Delete</button>
                     </div>
                 )
             })}
